@@ -88,6 +88,8 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Ensure company exists in company core
+        # Dependabot PRs get no repo secrets (SOLR_AUTH empty -> 401); skip the real write for them.
+        if: github.actor != 'dependabot[bot]'
         env:
           SOLR_AUTH: ${{ secrets.SOLR_AUTH }}
         run: |
