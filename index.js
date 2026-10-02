@@ -425,7 +425,6 @@ async function main() {
     const rawJobs = await scrapeAllListings(testOnlyOnePage);
     const scrapedCount = rawJobs.length;
     console.log(`📊 Jobs scraped from SOBIS AP careers page: ${scrapedCount}`);
-    assertCanary({ scraped: scrapedCount, existing: existingCount, source: "careers site" });
 
     // Step 3b: Also scrape ANOFM jobs for this CIF
     if (!testOnlyOnePage) {
@@ -438,6 +437,8 @@ async function main() {
       }
       console.log(`📊 Jobs added from ANOFM: ${anofmCount}`);
     }
+    // Canary counts careers page + ANOFM together (Solr jobs mostly come from ANOFM)
+    assertCanary({ scraped: rawJobs.length, existing: existingCount, source: "careers page + ANOFM" });
 
     // Step 4: Map raw jobs to Solr model
     const jobs = rawJobs.map(job => mapToJobModel(job, localCif));
