@@ -17,7 +17,7 @@
     "dotenv": "^16.4.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
+    "jest": "^30.5.2",
     "jest-html-reporter": "^4.4.2"
   },
   "jest": {
