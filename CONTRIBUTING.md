@@ -12,7 +12,7 @@ This scraper is derived from the [EPAM template](https://github.com/sebiboga/epa
 
 ```bash
 # Clone the repo
-git clone https://github.com/sebiboga/sobis-ap-srl-nodejs-scraper.git
+git clone https://github.com/TheTatu13/sobis-ap-srl-nodejs-scraper.git
 
 # Install dependencies
 npm install
@@ -31,7 +31,7 @@ npm test
 
 ## Reporting Issues
 
-Open a [GitHub Issue](https://github.com/sebiboga/sobis-ap-srl-nodejs-scraper/issues) with:
+Open a [GitHub Issue](https://github.com/TheTatu13/sobis-ap-srl-nodejs-scraper/issues) with:
 - Clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior

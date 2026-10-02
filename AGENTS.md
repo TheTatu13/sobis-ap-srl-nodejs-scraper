@@ -16,7 +16,7 @@ The scraping logic in `index.js` parses the SOBIS AP careers HTML page at `https
 
 When polling a workflow run, always specify the repo explicitly:
 ```bash
-gh run view <RUN_ID> --repo sebiboga/sobis-ap-srl-nodejs-scraper --json status -q .status
+gh run view <RUN_ID> --repo TheTatu13/sobis-ap-srl-nodejs-scraper --json status -q .status
 ```
 
 ### 1. Temporary Files
