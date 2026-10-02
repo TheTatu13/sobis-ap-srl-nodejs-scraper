@@ -23,7 +23,7 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Create auto-heal issue
         run: |
           gh label create "auto-heal" --color "d73a4a" --description "Auto-heal issue for opencode" 2>/dev/null || true
@@ -56,7 +56,7 @@ jobs:
     needs: Automation-Tests
     
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Ensure company exists in company core
         env:
@@ -139,7 +139,7 @@ jobs:
       contents: write
     
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         
       - name: Setup Node.js
         uses: actions/setup-node@v5
