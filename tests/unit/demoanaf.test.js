@@ -163,11 +163,51 @@ describe('scraper/anaf.js', () => {
       expect(mockFetch).toHaveBeenCalledTimes(2);
     });
 
+    it('should retry CUIScan when it answers HTML instead of JSON', async () => {
+      mockFetch
+        .mockResolvedValueOnce(errorResponse(500))
+        .mockResolvedValueOnce({ ok: true, json: async () => { throw new SyntaxError('Unexpected token <'); } })
+        .mockResolvedValueOnce(cuiscanCompanyResponse(CUISCAN_RECORD));
+
+      const data = await anaf.getCompanyFromANAF('39176747');
+
+      expect(data.name).toBe('LSEG BUSINESS SERVICES RM S.R.L.');
+      expect(mockFetch).toHaveBeenCalledTimes(3);
+    });
+
+    it('should give up with a clear error when CUIScan keeps answering HTML', async () => {
+      mockFetch
+        .mockResolvedValueOnce(errorResponse(500))
+        .mockResolvedValue({ ok: true, json: async () => { throw new SyntaxError('Unexpected token <'); } });
+
+      await expect(anaf.getCompanyFromANAF('39176747')).rejects.toThrow(/non-JSON/);
+      expect(mockFetch).toHaveBeenCalledTimes(5);
+    });
+
+    it('should fall back to the official ANAF API when CUIScan is unusable', async () => {
+      mockFetch
+        .mockResolvedValueOnce(errorResponse(500))
+        .mockResolvedValueOnce(errorResponse(503))
+        .mockResolvedValueOnce({ ok: true, json: async () => ({ found: [{
+          date_generale: { cui: 21913994, denumire: 'GAMINVEST SRL', adresa: 'ORADEA', cod_CAEN: '6831' },
+          inregistrare_scop_Tva: { scpTVA: true },
+          stare_inactiv: { statusInactivi: false }
+        }] }) });
+
+      const data = await anaf.getCompanyFromANAF('21913994');
+
+      expect(data.name).toBe('GAMINVEST SRL');
+      expect(data.vatRegistered).toBe(true);
+      expect(data.inactive).toBe(false);
+      expect(mockFetch).toHaveBeenCalledTimes(3);
+      expect(mockFetch.mock.calls[2][0]).toContain('webservicesp.anaf.ro');
+    });
+
     it('should throw when both ANAF and CUIScan fail', async () => {
       mockFetch.mockResolvedValue(errorResponse(500));
 
       await expect(anaf.getCompanyFromANAF('39176747')).rejects.toThrow();
-      expect(mockFetch).toHaveBeenCalledTimes(2);
+      expect(mockFetch).toHaveBeenCalledTimes(3);
     });
 
     it('should handle API-level error response', async () => {
