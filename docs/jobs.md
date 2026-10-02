@@ -10,11 +10,23 @@
 | Location | DUMBRĂVII, 101, Municipiul Sibiu, Sibiu |
 | Website | [https://sobis-ap.ro](https://sobis-ap.ro) |
 | Careers | [https://sobis-ap.ro/cariere](https://sobis-ap.ro/cariere) |
-| Last Scraped | 2026-10-01 |
+| Last Scraped | 2026-10-02 |
 
-## Current Job Listings (7)
+## Current Job Listings (8)
 
-_Generated: 2026-10-01T12:29:35.751Z_
+_Generated: 2026-10-02T11:55:55.012Z_
+
+### INGINER DE SISTEM ÎN INFORMATICA
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3405980](https://mediere.anofm.ro/app/module/mediere/job/3405980)
+- **Location:** SIBIU
+- **Status:** scraped
+
+### PROGRAMATOR AJUTOR
+
+- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3405976](https://mediere.anofm.ro/app/module/mediere/job/3405976)
+- **Location:** SIBIU
+- **Status:** scraped
 
 ### CONSULTANT ÎN INFORMATICA
 
@@ -31,12 +43,6 @@ _Generated: 2026-10-01T12:29:35.751Z_
 ### PROGRAMATOR
 
 - **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3388427](https://mediere.anofm.ro/app/module/mediere/job/3388427)
-- **Location:** SIBIU
-- **Status:** scraped
-
-### CONSULTANT ÎN INFORMATICA
-
-- **URL:** [https://mediere.anofm.ro/app/module/mediere/job/3388377](https://mediere.anofm.ro/app/module/mediere/job/3388377)
 - **Location:** SIBIU
 - **Status:** scraped
 
