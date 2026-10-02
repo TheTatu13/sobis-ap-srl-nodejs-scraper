@@ -1,14 +1,27 @@
-<html><head><meta charset="utf-8"/><title>Pre-scrape: Unit Tests — SOBIS AP S.R.L.</title><style type="text/css">html,
+<html><head><meta charset="utf-8"/><title>Pre-scrape: Unit Tests — SOBIS AP S.R.L.</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
 body {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   margin: 0;
   padding: 0;
-  color: #333;
+  color: var(--text-primary);
 }
 body {
   padding: 2rem 1rem;
-  font-size: 0.85rem;
 }
 .jesthtml-content {
   margin: 0 auto;
@@ -26,21 +39,34 @@ header {
   height: 4rem;
 }
 #timestamp {
-  color: #777;
+  color: var(--text-secondary);
   margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
 }
 
 /** SUMMARY */
 #summary {
-  color: #333;
-  margin: 2rem 0;
+  color: var(--text-primary);
   display: flex;
   font-family: monospace;
   font-size: 1rem;
 }
 #summary > div {
-  margin-right: 2rem;
-  background: #eee;
+  margin-right: 0.5rem;
+  background: var(--panel);
   padding: 1rem;
   min-width: 15rem;
 }
@@ -53,7 +79,7 @@ header {
   }
   #summary > div {
     margin-right: 0;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   #summary > div:first-child {
     margin-top: 0;
@@ -65,24 +91,28 @@ header {
   margin-bottom: 0.5rem;
 }
 .summary-passed {
-  color: #4f8a10;
-  border-left: 0.4rem solid #4f8a10;
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
   padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
 }
 .summary-failed,
 .summary-obsolete-snapshots {
-  color: #d8000c;
-  border-left: 0.4rem solid #d8000c;
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
   padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
 }
 .summary-pending {
-  color: #9f6000;
-  border-left: 0.4rem solid #9f6000;
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
   padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
 }
 .summary-empty {
-  color: #999;
-  border-left: 0.4rem solid #999;
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
 }
 
 .test-result {
@@ -93,16 +123,16 @@ header {
   border: 0;
 }
 .test-result.passed {
-  background-color: #dff2bf;
-  color: #4f8a10;
+  background-color: var(--success-bright);
+  color: var(--success);
 }
 .test-result.failed {
-  background-color: #ffbaba;
-  color: #d8000c;
+  background-color: var(--danger-bright);
+  color: var(--danger);
 }
 .test-result.pending {
-  background-color: #ffdf61;
-  color: #9f6000;
+  background-color: var(--warning-bright);
+  color: var(--warning);
 }
 
 .test-info {
@@ -127,13 +157,13 @@ header {
 .test-duration {
   width: 10%;
   text-align: right;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .failureMessages {
   padding: 0 1rem;
   margin-top: 1rem;
-  border-top: 1px dashed #d8000c;
+  border-top: 1px dashed var(--danger);
 }
 .failureMessages.suiteFailure {
   border-top: none;
@@ -147,33 +177,20 @@ header {
 }
 
 .suite-container {
-  margin-bottom: 2rem;
-}
-.suite-container > input[type="checkbox"] {
-  position: absolute;
-  left: -100vw;
-}
-.suite-container label {
-  display: block;
-}
-.suite-container .suite-tests {
-  overflow-y: hidden;
-  height: 0;
-}
-.suite-container > input[type="checkbox"]:checked ~ .suite-tests {
-  height: auto;
-  overflow: visible;
+  margin-bottom: 1rem;
 }
 .suite-info {
   padding: 1rem;
-  background-color: #eee;
-  color: #777;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
   display: flex;
   align-items: center;
   margin-bottom: 0.25rem;
 }
 .suite-info:hover {
-  background-color: #ddd;
+  border-color: var(--border);
   cursor: pointer;
 }
 .suite-info .suite-path {
@@ -183,29 +200,29 @@ header {
   font-size: 1rem;
 }
 .suite-info .suite-time {
-  margin-left: 0.5rem;
+  margin-left: 1rem;
   padding: 0.2rem 0.3rem;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 .suite-info .suite-time.warn {
-  background-color: #d8000c;
+  background-color: var(--danger);
   color: #fff;
 }
 .suite-info:before {
   content: "\2303";
   display: inline-block;
-  margin-right: 0.5rem;
-  transform: rotate(0deg);
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
 }
-.suite-container > input[type="checkbox"]:checked ~ label .suite-info:before {
-  transform: rotate(180deg);
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
 }
 
 /* CONSOLE LOGS */
 .suite-consolelog {
   margin-bottom: 0.25rem;
   padding: 1rem;
-  background-color: #efefef;
+  background-color: var(--panel);
 }
 .suite-consolelog-header {
   font-weight: bold;
@@ -222,11 +239,11 @@ header {
   word-wrap: break-word;
 }
 .suite-consolelog-item-origin {
-  color: #777;
+  color: var(--text-secondary);
   font-weight: bold;
 }
 .suite-consolelog-item-message {
-  color: #000;
+  color: var(--text-primary);
   font-size: 1rem;
   padding: 0 0.5rem;
 }
@@ -235,8 +252,8 @@ header {
 .suite-obsolete-snapshots {
   margin-bottom: 0.25rem;
   padding: 1rem;
-  background-color: #ffbaba;
-  color: #d8000c;
+  background-color: var(--danger-bright);
+  color: var(--danger);
 }
 .suite-obsolete-snapshots-header {
   font-weight: bold;
@@ -253,8 +270,8 @@ header {
   word-wrap: break-word;
 }
 .suite-obsolete-snapshots-item-message {
-  color: #000;
+  color: var(--text-primary);
   font-size: 1rem;
   padding: 0 0.5rem;
 }
-</style></head><body><div class="jesthtml-content"><header><h1 id="title">Pre-scrape: Unit Tests — SOBIS AP S.R.L.</h1></header><div id="metadata-container"><div id="timestamp">Started: 2026-10-02 13:47:05</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (6)</div><div class="summary-passed ">6 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (77)</div><div class="summary-passed ">77 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></div><div id="suite-1" class="suite-container"><input id="collapsible-0" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-0"><div class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/demoanaf.test.js</div><div class="suite-time">0.523s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should return array of companies for valid brand</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should return empty array for non-existent brand</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should include statusLabel in results</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should fallback to CUIFirma when ANAF search fails</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should encode brand name in URL</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should return company data for valid CIF</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should fallback to CUIScan when ANAF fails</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should throw when both ANAF and CUIScan fail</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should handle API-level error response</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should return null when data is null</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAFWithFallback</div><div class="test-title">should return fresh data when API works</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAFWithFallback</div><div class="test-title">should use cached data when API fails</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAFWithFallback</div><div class="test-title">should throw when API fails and no cache available</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div></div></div><div id="suite-2" class="suite-container"><input id="collapsible-1" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-1"><div class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/solr.test.js</div><div class="suite-time">0.641s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; getSolrAuth</div><div class="test-title">should return SOLR_AUTH from environment</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; getSolrAuth</div><div class="test-title">should throw when not set</div><div class="test-status">passed</div><div class="test-duration">0.017s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should return response object with docs</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should return empty docs when no jobs found</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should throw when SOLR_AUTH is missing</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; queryCompanySOLR</div><div class="test-title">should return company data</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; queryCompanySOLR</div><div class="test-title">should return empty when company not found</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; queryCompanySOLR</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; upsertJobs</div><div class="test-title">should accept array of jobs</div><div class="test-status">passed</div><div class="test-duration">0.039s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; upsertJobs</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; upsertJobs</div><div class="test-title">should throw when SOLR_AUTH is missing</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobByUrl</div><div class="test-title">should delete a job by URL</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobByUrl</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobsByCIF</div><div class="test-title">should delete all jobs for a CIF</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobsByCIF</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should not have duplicate URLs for same CIF</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should have valid CIF format for all jobs</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should detect invalid CIF format</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should have valid status values</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></div><div id="suite-3" class="suite-container"><input id="collapsible-2" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-2"><div class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/company.test.js</div><div class="suite-time">0.219s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (no cache)</div><div class="test-title">should fetch SOBIS AP via direct CIF lookup and return company data</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (no cache)</div><div class="test-title">should throw when ANAF returns no data</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (no cache)</div><div class="test-title">should throw when ANAF returns no company name</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (with cache)</div><div class="test-title">should use cached company data when available</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; validateAndGetCompany</div><div class="test-title">should return company data with status active</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div></div></div><div id="suite-4" class="suite-container"><input id="collapsible-3" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-3"><div class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/markdown-generator.test.js</div><div class="suite-time">0.143s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes company name as h1</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes CIF</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes brand</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes status</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes website as markdown link</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes career page as markdown link</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes lastScraped date</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">omits optional fields when not present</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">shows job count in heading</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">shows 0 when no jobs</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes job title as h3</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes job URL as markdown link</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes workmode</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes location</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes tags</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes status</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">renders multiple jobs</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">handles job with no optional fields</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; output format</div><div class="test-title">returns a non-empty string</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; output format</div><div class="test-title">includes a generated timestamp</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div></div></div><div id="suite-5" class="suite-container"><input id="collapsible-4" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-4"><div class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/job-validator.test.js</div><div class="suite-time">0.115s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">returns active when HEAD response is ok</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">returns expired on non-2xx response</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">returns error when fetch throws</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">issues a HEAD request</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">returns active when body has no expired keywords</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">returns expired when body has an expired keyword</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">accepts custom keywords</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">returns error when fetch throws</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; DEFAULT_EXPIRED_KEYWORDS</div><div class="test-title">is a non-empty array of lowercase strings</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></div><div id="suite-6" class="suite-container"><input id="collapsible-5" type="checkbox" class="toggle" checked="checked"/><label for="collapsible-5"><div class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/index.test.js</div><div class="suite-time">0.884s</div></div></label><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should filter locations to only Romanian cities</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should keep company uppercase</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should normalize workmode values</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should handle empty jobs array</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; mapToJobModel</div><div class="test-title">should map raw job to job model format</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; mapToJobModel</div><div class="test-title">should remove undefined fields</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; mapToJobModel</div><div class="test-title">should handle missing title</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; parseCareersHtml</div><div class="test-title">should parse SOBIS AP careers page HTML</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; parseCareersHtml</div><div class="test-title">should handle empty HTML</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; parseCareersHtml</div><div class="test-title">should handle multiple job panels</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div></div></div></div></body></html>
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Pre-scrape: Unit Tests — SOBIS AP S.R.L.</h1></header><section id="metadata-container"><div id="timestamp">Started: 2026-10-02 15:33:26</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (6)</div><div class="summary-passed ">6 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (77)</div><div class="summary-passed ">77 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/solr.test.js</div><div class="suite-time">0.715s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; getSolrAuth</div><div class="test-title">should return SOLR_AUTH from environment</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; getSolrAuth</div><div class="test-title">should throw when not set</div><div class="test-status">passed</div><div class="test-duration">0.024s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should return response object with docs</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should return empty docs when no jobs found</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should throw when SOLR_AUTH is missing</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; querySOLR</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; queryCompanySOLR</div><div class="test-title">should return company data</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; queryCompanySOLR</div><div class="test-title">should return empty when company not found</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; queryCompanySOLR</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; upsertJobs</div><div class="test-title">should accept array of jobs</div><div class="test-status">passed</div><div class="test-duration">0.045s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; upsertJobs</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; upsertJobs</div><div class="test-title">should throw when SOLR_AUTH is missing</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobByUrl</div><div class="test-title">should delete a job by URL</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobByUrl</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobsByCIF</div><div class="test-title">should delete all jobs for a CIF</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; deleteJobsByCIF</div><div class="test-title">should throw on HTTP error</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should not have duplicate URLs for same CIF</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should have valid CIF format for all jobs</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should detect invalid CIF format</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">solr.js &gt; Data Integrity</div><div class="test-title">should have valid status values</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/demoanaf.test.js</div><div class="suite-time">0.75s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should return array of companies for valid brand</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should return empty array for non-existent brand</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should include statusLabel in results</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should fallback to CUIFirma when ANAF search fails</div><div class="test-status">passed</div><div class="test-duration">0.048s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; searchCompany</div><div class="test-title">should encode brand name in URL</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should return company data for valid CIF</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should fallback to CUIScan when ANAF fails</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should throw when both ANAF and CUIScan fail</div><div class="test-status">passed</div><div class="test-duration">0.033s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should handle API-level error response</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAF</div><div class="test-title">should return null when data is null</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAFWithFallback</div><div class="test-title">should return fresh data when API works</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAFWithFallback</div><div class="test-title">should use cached data when API fails</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">scraper/anaf.js &gt; getCompanyFromANAFWithFallback</div><div class="test-title">should throw when API fails and no cache available</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/markdown-generator.test.js</div><div class="suite-time">0.132s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes company name as h1</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes CIF</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes brand</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes status</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes website as markdown link</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes career page as markdown link</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">includes lastScraped date</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; company section</div><div class="test-title">omits optional fields when not present</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">shows job count in heading</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">shows 0 when no jobs</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes job title as h3</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes job URL as markdown link</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes workmode</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes location</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes tags</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">includes status</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">renders multiple jobs</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; jobs section</div><div class="test-title">handles job with no optional fields</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; output format</div><div class="test-title">returns a non-empty string</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">generateJobsMarkdown &gt; output format</div><div class="test-title">includes a generated timestamp</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/company.test.js</div><div class="suite-time">0.235s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (no cache)</div><div class="test-title">should fetch SOBIS AP via direct CIF lookup and return company data</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (no cache)</div><div class="test-title">should throw when ANAF returns no data</div><div class="test-status">passed</div><div class="test-duration">0.032s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (no cache)</div><div class="test-title">should throw when ANAF returns no company name</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; getCompanyData (with cache)</div><div class="test-title">should use cached company data when available</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">company.js &gt; validateAndGetCompany</div><div class="test-title">should return company data with status active</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/index.test.js</div><div class="suite-time">1.022s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should filter locations to only Romanian cities</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should keep company uppercase</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should normalize workmode values</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; transformJobsForSOLR</div><div class="test-title">should handle empty jobs array</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; mapToJobModel</div><div class="test-title">should map raw job to job model format</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; mapToJobModel</div><div class="test-title">should remove undefined fields</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; mapToJobModel</div><div class="test-title">should handle missing title</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; parseCareersHtml</div><div class="test-title">should parse SOBIS AP careers page HTML</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; parseCareersHtml</div><div class="test-title">should handle empty HTML</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">index.js Component Tests &gt; parseCareersHtml</div><div class="test-title">should handle multiple job panels</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/runner/work/sobis-ap-srl-nodejs-scraper/sobis-ap-srl-nodejs-scraper/tests/unit/job-validator.test.js</div><div class="suite-time">0.137s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">returns active when HEAD response is ok</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">returns expired on non-2xx response</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">returns error when fetch throws</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByHead</div><div class="test-title">issues a HEAD request</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">returns active when body has no expired keywords</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">returns expired when body has an expired keyword</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">accepts custom keywords</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; validateByContent</div><div class="test-title">returns error when fetch throws</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">src/job-validator.js &gt; DEFAULT_EXPIRED_KEYWORDS</div><div class="test-title">is a non-empty array of lowercase strings</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details></main></body></html>
