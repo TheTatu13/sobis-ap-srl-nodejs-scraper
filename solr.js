@@ -17,7 +17,7 @@
  * - company: Stores company metadata
  */
 
-import fetch from "node-fetch";
+import { fetchWithRetry as fetch, isDryRun } from "./src/premium.js";
 import fs from "fs";
 import { loadEnvFile } from "node:process";
 
@@ -62,6 +62,10 @@ export function getSolrAuth() {
  * @returns {Promise<Object>} - Solr response with numFound and docs array
  */
 export async function querySOLR(cif) {
+  if (isDryRun() && !process.env.SOLR_AUTH) {
+    console.log('[dry-run] no SOLR_AUTH - assuming no existing jobs');
+    return { numFound: 0, docs: [] };
+  }
   const AUTH = getSolrAuth();
 
   const params = new URLSearchParams({
@@ -95,6 +99,7 @@ export async function querySOLR(cif) {
  * @param {Object} companyDoc - Company document with id, company, brand, status, location, etc.
  */
 export async function upsertCompany(companyDoc) {
+  if (isDryRun()) { console.log('[dry-run] upsertCompany skipped'); return; }
   const AUTH = getSolrAuth();
 
   const params = new URLSearchParams({ commit: "true" });
@@ -159,6 +164,7 @@ export async function queryCompanySOLR(companyQuery) {
  * @param {string} cif - Company CIF to delete jobs for
  */
 export async function deleteJobsByCIF(cif) {
+  if (isDryRun()) { console.log('[dry-run] deleteJobsByCIF skipped'); return; }
   const AUTH = getSolrAuth();
 
   const params = new URLSearchParams({ commit: "true" });
@@ -192,6 +198,7 @@ export async function deleteJobsByCIF(cif) {
  * @param {string} url - Job URL to delete
  */
 export async function deleteJobByUrl(url) {
+  if (isDryRun()) { console.log('[dry-run] deleteJobByUrl skipped'); return; }
   const AUTH = getSolrAuth();
 
   const params = new URLSearchParams({ commit: "true" });
@@ -226,6 +233,7 @@ export async function deleteJobByUrl(url) {
  * @param {Array} jobs - Array of job objects to upsert
  */
 export async function upsertJobs(jobs) {
+  if (isDryRun()) { console.log('[dry-run] upsertJobs skipped'); return; }
   const AUTH = getSolrAuth();
 
   const params = new URLSearchParams({ commit: "true" });

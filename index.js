@@ -6,7 +6,7 @@
  * data transformation, and Solr storage.
  */
 
-import fetch from "node-fetch";
+import { fetchWithRetry as fetch, assertCanary } from "./src/premium.js";
 import * as cheerio from "cheerio";
 import fs from "fs";
 import { fileURLToPath } from "url";
@@ -425,6 +425,7 @@ async function main() {
     const rawJobs = await scrapeAllListings(testOnlyOnePage);
     const scrapedCount = rawJobs.length;
     console.log(`📊 Jobs scraped from SOBIS AP careers page: ${scrapedCount}`);
+    assertCanary({ scraped: scrapedCount, existing: existingCount, source: "careers site" });
 
     // Step 3b: Also scrape ANOFM jobs for this CIF
     if (!testOnlyOnePage) {
