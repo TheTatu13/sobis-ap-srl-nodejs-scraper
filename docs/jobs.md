@@ -7,14 +7,14 @@
 | CIF | 52200796 |
 | Brand | SOBIS |
 | Status | activ |
-| Location | DUMBRĂVII, 101, Municipiul Sibiu, Sibiu |
+| Location | JUD. SIBIU, MUN. SIBIU, STR. ŞERBOTA, NR.1A |
 | Website | [https://sobis-ap.ro](https://sobis-ap.ro) |
 | Careers | [https://sobis-ap.ro/cariere](https://sobis-ap.ro/cariere) |
 | Last Scraped | 2026-10-02 |
 
 ## Current Job Listings (8)
 
-_Generated: 2026-10-02T11:55:55.012Z_
+_Generated: 2026-10-02T12:46:05.084Z_
 
 ### INGINER DE SISTEM ÎN INFORMATICA
 
