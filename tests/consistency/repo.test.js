@@ -88,6 +88,9 @@ describe("Repository Configuration", () => {
         console.log("GITHUB_REPOSITORY not set — running locally, skipping");
         return;
       }
+      if (process.env.GITHUB_ACTOR === 'dependabot[bot]') {
+        return;
+      }
       expect(process.env.SOLR_AUTH).toBeTruthy();
       console.log("✅ SOLR_AUTH is set");
     });
