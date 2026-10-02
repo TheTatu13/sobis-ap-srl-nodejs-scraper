@@ -28,33 +28,48 @@ function errorResponse(status) {
   };
 }
 
-const ANRAF_RECORD = {
-  cui: 52200796,
-  name: 'SOBIS AP S.R.L.',
-  address: 'Sibiu',
+function cuiscanCompanyResponse(data) {
+  return {
+    ok: true,
+    json: async () => data
+  };
+}
+
+const LSEG_ANAF_RECORD = {
+  cui: 39176747,
+  name: 'LSEG BUSINESS SERVICES RM S.R.L.',
+  address: 'IANCU DE HUNEDOARA, 48, Bucureşti Sectorul 1, Bucureşti',
   caenCode: '6220',
   inactive: false,
-  inactiveSince: null,
-  reactivatedSince: null,
-  registrationNumber: 'J32/2025',
+  registrationNumber: 'J2014005735405',
   vatRegistered: true,
   onrcStatusLabel: 'Funcțiune',
   legalForm: 'SRL'
 };
 
-const CACHED_DATA = {
-  cui: 52200796,
-  name: 'SOBIS AP S.R.L.',
-  address: 'Sibiu',
-  registrationNumber: 'J32/2025',
-  caenCode: '6220',
-  inactive: false,
-  onrcStatusLabel: 'Funcțiune',
-  administrators: [],
-  authorizedCaenCodes: ['6210', '6220', '6290']
+const CUISCAN_RECORD = {
+  cui: 39176747,
+  denumire: 'LSEG BUSINESS SERVICES RM S.R.L.',
+  adresa: 'IANCU DE HUNEDOARA, 48, Bucureşti Sectorul 1, Bucureşti',
+  codCaen: '6220',
+  activ: true,
+  nrRegCom: 'J2014005735405',
+  platitorTVA: true,
+  stareInregistrare: 'INREGISTRAT din data 14.05.2014',
+  adresaSediu: { strada: 'Bld. Iancu de Hunedoara', numar: '48', localitate: 'Sector 1 Mun. Bucureşti', judet: 'MUNICIPIUL BUCUREŞTI', codPostal: '11745' }
 };
 
-describe('src/anaf.js', () => {
+const CACHED_DATA = {
+  cui: 39176747,
+  name: 'LSEG BUSINESS SERVICES RM S.R.L.',
+  address: 'MUNICIPIUL BUCUREŞTI, SECTOR 1, BLD IANCU DE HUNEDOARA, NR.48, ET.9',
+  registrationNumber: 'J2014005735405',
+  caenCode: '6220',
+  inactive: false,
+  onrcStatusLabel: 'Funcțiune'
+};
+
+describe('scraper/anaf.js', () => {
   let anaf;
 
   beforeAll(async () => {
@@ -68,10 +83,10 @@ describe('src/anaf.js', () => {
   describe('searchCompany', () => {
     it('should return array of companies for valid brand', async () => {
       mockFetch.mockResolvedValue(anafSearchResponse([
-        { cui: 52200796, name: 'SOBIS AP S.R.L.', statusLabel: 'Funcțiune' }
+        { cui: 39176747, name: 'LSEG BUSINESS SERVICES RM S.R.L.', statusLabel: 'Funcțiune' }
       ]));
 
-      const results = await anaf.searchCompany('SOBIS AP');
+      const results = await anaf.searchCompany('LSEG');
 
       expect(Array.isArray(results)).toBe(true);
       expect(results.length).toBeGreaterThan(0);
@@ -90,18 +105,24 @@ describe('src/anaf.js', () => {
 
     it('should include statusLabel in results', async () => {
       mockFetch.mockResolvedValue(anafSearchResponse([
-        { cui: 52200796, name: 'SOBIS AP S.R.L.', statusLabel: 'Funcțiune' }
+        { cui: 39176747, name: 'LSEG BUSINESS SERVICES RM S.R.L.', statusLabel: 'Funcțiune' }
       ]));
 
-      const results = await anaf.searchCompany('SOBIS AP');
+      const results = await anaf.searchCompany('LSEG');
 
       expect(results[0]).toHaveProperty('statusLabel', 'Funcțiune');
     });
 
-    it('should throw on HTTP error', async () => {
-      mockFetch.mockResolvedValue(errorResponse(500));
+    it('should fallback to CUIFirma when ANAF search fails', async () => {
+      mockFetch
+        .mockResolvedValueOnce(errorResponse(500))
+        .mockResolvedValueOnce({ ok: true, json: async () => ({ results: [{ cui: 39176747, name: 'LSEG BUSINESS SERVICES RM S.R.L.', is_active: true }] }) });
 
-      await expect(anaf.searchCompany('SOBIS AP')).rejects.toThrow('ANAF search error: 500');
+      const results = await anaf.searchCompany('LSEG');
+
+      expect(Array.isArray(results)).toBe(true);
+      expect(results.length).toBeGreaterThan(0);
+      expect(results[0].cui).toBe('39176747');
     });
 
     it('should encode brand name in URL', async () => {
@@ -111,48 +132,51 @@ describe('src/anaf.js', () => {
         return Promise.resolve(anafSearchResponse([]));
       });
 
-      await anaf.searchCompany('SOBIS AP S.R.L.');
-      expect(capturedUrl).toContain(encodeURIComponent('SOBIS AP S.R.L.'));
+      await anaf.searchCompany('LSEG SRL');
+      expect(capturedUrl).toContain(encodeURIComponent('LSEG SRL'));
     });
   });
 
   describe('getCompanyFromANAF', () => {
     it('should return company data for valid CIF', async () => {
-      mockFetch.mockResolvedValue(anafCompanyResponse(ANRAF_RECORD));
+      mockFetch.mockResolvedValue(anafCompanyResponse(LSEG_ANAF_RECORD));
 
-      const data = await anaf.getCompanyFromANAF('52200796');
+      const data = await anaf.getCompanyFromANAF('39176747');
 
       expect(data).toBeDefined();
-      expect(data.cui).toBe(52200796);
-      expect(data.name).toBe('SOBIS AP S.R.L.');
+      expect(data.cui).toBe(39176747);
+      expect(data.name).toBe('LSEG BUSINESS SERVICES RM S.R.L.');
       expect(data).toHaveProperty('address');
       expect(data).toHaveProperty('registrationNumber');
     });
 
-    it('should retry on HTTP error then succeed', async () => {
+    it('should fallback to CUIScan when ANAF fails', async () => {
       mockFetch
         .mockResolvedValueOnce(errorResponse(500))
-        .mockResolvedValueOnce(anafCompanyResponse(ANRAF_RECORD));
+        .mockResolvedValueOnce(cuiscanCompanyResponse(CUISCAN_RECORD));
 
-      const data = await anaf.getCompanyFromANAF('52200796');
+      const data = await anaf.getCompanyFromANAF('39176747');
 
       expect(data).toBeDefined();
-      expect(data.cui).toBe(52200796);
+      expect(data.cui).toBe(39176747);
+      expect(data.name).toBe('LSEG BUSINESS SERVICES RM S.R.L.');
       expect(mockFetch).toHaveBeenCalledTimes(2);
     });
 
-    it('should throw after exhausting retries', async () => {
+    it('should throw when both ANAF and CUIScan fail', async () => {
       mockFetch.mockResolvedValue(errorResponse(500));
 
-      await expect(anaf.getCompanyFromANAF('52200796')).rejects.toThrow();
-      expect(mockFetch).toHaveBeenCalledTimes(3);
+      await expect(anaf.getCompanyFromANAF('39176747')).rejects.toThrow();
+      expect(mockFetch).toHaveBeenCalledTimes(2);
     });
 
     it('should handle API-level error response', async () => {
-      mockFetch.mockResolvedValue({
-        ok: true,
-        json: async () => ({ success: false, error: { message: 'Company not found' } })
-      });
+      mockFetch
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ success: false, error: { message: 'Company not found' } })
+        })
+        .mockResolvedValueOnce(errorResponse(500));
 
       await expect(anaf.getCompanyFromANAF('00000000')).rejects.toThrow();
     });
@@ -160,24 +184,24 @@ describe('src/anaf.js', () => {
     it('should return null when data is null', async () => {
       mockFetch.mockResolvedValue(anafCompanyResponse(null));
 
-      const data = await anaf.getCompanyFromANAF('52200796');
+      const data = await anaf.getCompanyFromANAF('39176747');
       expect(data).toBeNull();
     });
   });
 
   describe('getCompanyFromANAFWithFallback', () => {
     it('should return fresh data when API works', async () => {
-      mockFetch.mockResolvedValue(anafCompanyResponse(ANRAF_RECORD));
+      mockFetch.mockResolvedValue(anafCompanyResponse(LSEG_ANAF_RECORD));
 
-      const data = await anaf.getCompanyFromANAFWithFallback('52200796');
+      const data = await anaf.getCompanyFromANAFWithFallback('39176747');
 
-      expect(data.name).toBe('SOBIS AP S.R.L.');
+      expect(data.name).toBe('LSEG BUSINESS SERVICES RM S.R.L.');
     });
 
     it('should use cached data when API fails', async () => {
       mockFetch.mockResolvedValue(errorResponse(500));
 
-      const data = await anaf.getCompanyFromANAFWithFallback('52200796', CACHED_DATA);
+      const data = await anaf.getCompanyFromANAFWithFallback('39176747', CACHED_DATA);
 
       expect(data).toEqual(CACHED_DATA);
     });
@@ -185,7 +209,7 @@ describe('src/anaf.js', () => {
     it('should throw when API fails and no cache available', async () => {
       mockFetch.mockResolvedValue(errorResponse(500));
 
-      await expect(anaf.getCompanyFromANAFWithFallback('52200796')).rejects.toThrow();
+      await expect(anaf.getCompanyFromANAFWithFallback('39176747')).rejects.toThrow();
     });
   });
 });
