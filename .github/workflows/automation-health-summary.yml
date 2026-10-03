@@ -13,7 +13,7 @@ on:
 
 jobs:
   summary:
-    uses: TheTatu13/Brewtality-3-16/.github/workflows/health-summary-reusable.yml@v1
+    uses: peviitor-scrapers/Brewtality-3-16/.github/workflows/health-summary-reusable.yml@v1
     # NOTE: this path is the template repo's ROOT .github/workflows/ folder,
     # not scraper-py/.github/workflows/ — GitHub only resolves `uses:`
     # references from a repo's root workflows directory.

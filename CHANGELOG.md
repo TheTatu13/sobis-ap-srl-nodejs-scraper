@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite (unit, integration, E2E)
 - ANAF API fallback with cached data support
 - Node 24 compatibility
-- Derived from sebiboga/epam-systems-international-srl-nodejs-scraper template
+- Derived from peviitor-scrapers/epam-systems-international-srl-nodejs-scraper template
 
 ### Features
 - Automated daily job scraping from https://sobis-ap.ro/cariere/

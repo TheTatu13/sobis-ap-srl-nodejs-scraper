@@ -22,7 +22,7 @@ job_seeker_ro_spider
 3. **Scrape-uiește job-urile** — extrage lista completă de job-uri din pagina HTML de cariere SOBIS AP
 4. **Transformă datele** — normalizează locațiile (doar orașe românești), tag-urile (lowercase), workmode-ul (remote/on-site/hybrid)
 5. **Stochează în SOLR** — upsert în `job` core (job-urile) și `company` core (datele companiei cu adresa completă)
-6. **Generează docs/jobs.md** — fișier markdown cu informații companie + toate job-urile curente, publicat pe [GitHub Pages](https://thetatu13.github.io/sobis-ap-srl-nodejs-scraper/jobs.md)
+6. **Generează docs/jobs.md** — fișier markdown cu informații companie + toate job-urile curente, publicat pe [GitHub Pages](https://peviitor-scrapers.github.io/sobis-ap-srl-nodejs-scraper/jobs.md)
 
 ## Structură proiect
 

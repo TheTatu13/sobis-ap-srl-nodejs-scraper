@@ -1,21 +1,21 @@
 # job_seeker_ro_spider — SOBIS AP Romania Scraper
 
-[![Oportunitati SI Cariere](https://github.com/TheTatu13/sobis-ap-srl-nodejs-scraper/actions/workflows/job-seeker-ro-spider.yml/badge.svg)](https://github.com/TheTatu13/sobis-ap-srl-nodejs-scraper/actions/workflows/job-seeker-ro-spider.yml)
-[![Automation Tests](https://github.com/TheTatu13/sobis-ap-srl-nodejs-scraper/actions/workflows/automation-testing.yml/badge.svg)](https://github.com/TheTatu13/sobis-ap-srl-nodejs-scraper/actions/workflows/automation-testing.yml)
+[![Oportunitati SI Cariere](https://github.com/peviitor-scrapers/sobis-ap-srl-nodejs-scraper/actions/workflows/job-seeker-ro-spider.yml/badge.svg)](https://github.com/peviitor-scrapers/sobis-ap-srl-nodejs-scraper/actions/workflows/job-seeker-ro-spider.yml)
+[![Automation Tests](https://github.com/peviitor-scrapers/sobis-ap-srl-nodejs-scraper/actions/workflows/automation-testing.yml/badge.svg)](https://github.com/peviitor-scrapers/sobis-ap-srl-nodejs-scraper/actions/workflows/automation-testing.yml)
 
-[![Version](https://img.shields.io/github/package-json/v/TheTatu13/sobis-ap-srl-nodejs-scraper?label=version&color=blue)](CHANGELOG.md)
-[![Test Results](https://img.shields.io/badge/test--results-HTML-9b59b6)](https://thetatu13.github.io/sobis-ap-srl-nodejs-scraper/test-results/)
+[![Version](https://img.shields.io/github/package-json/v/peviitor-scrapers/sobis-ap-srl-nodejs-scraper?label=version&color=blue)](CHANGELOG.md)
+[![Test Results](https://img.shields.io/badge/test--results-HTML-9b59b6)](https://peviitor-scrapers.github.io/sobis-ap-srl-nodejs-scraper/test-results/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![JavaScript](https://img.shields.io/badge/javascript-ESM-F7DF1E?logo=javascript&logoColor=black)](https://ecma-international.org/)
 [![Node.js](https://img.shields.io/badge/node-24-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fpeviitor.ro&label=peviitor.ro)](https://peviitor.ro)
 [![API](https://img.shields.io/website?url=https%3A%2F%2Fapi.peviitor.ro%2F&label=api.peviitor.ro)](https://api.peviitor.ro/)
 [![SOLR](https://img.shields.io/website?url=https%3A%2F%2Fsolr.peviitor.ro%2Fsolr%2F&label=solr.peviitor.ro)](https://solr.peviitor.ro/solr/)
-[![GitHub Pages](https://img.shields.io/github/deployments/TheTatu13/sobis-ap-srl-nodejs-scraper/github-pages?label=GitHub%20Pages)](https://thetatu13.github.io/sobis-ap-srl-nodejs-scraper/)
+[![GitHub Pages](https://img.shields.io/github/deployments/peviitor-scrapers/sobis-ap-srl-nodejs-scraper/github-pages?label=GitHub%20Pages)](https://peviitor-scrapers.github.io/sobis-ap-srl-nodejs-scraper/)
 
 **job_seeker_ro_spider** — un scraper pentru job-urile SOBIS AP din România. Extrage anunțurile de pe [SOBIS AP Cariere](https://sobis-ap.ro/cariere/) și le publică în [peviitor.ro](https://peviitor.ro) prin API-ul SOLR.
 
-> **🌱 Derived scraper.** Acest repo este derivat din [EPAM template](https://github.com/sebiboga/epam-systems-international-srl-nodejs-scraper). Toate scraper-ele Node.js din ecosistemul peviitor.ro sunt derivate din acest pattern.
+> **🌱 Derived scraper.** Acest repo este derivat din [EPAM template](https://github.com/peviitor-scrapers/epam-systems-international-srl-nodejs-scraper). Toate scraper-ele Node.js din ecosistemul peviitor.ro sunt derivate din acest pattern.
 >
 > **📋 Companie:** SOBIS AP S.R.L. (CIF: 52200796)
 >
@@ -141,7 +141,7 @@ The `automation-testing.yml` workflow runs on every push and pull request.
 
 ## Derived From
 
-This scraper was derived from the [EPAM template](https://github.com/sebiboga/epam-systems-international-srl-nodejs-scraper).
+This scraper was derived from the [EPAM template](https://github.com/peviitor-scrapers/epam-systems-international-srl-nodejs-scraper).
 
 ## Acknowledgments
 
